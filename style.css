@@ -1,0 +1,654 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    overflow-x: hidden;
+    touch-action: manipulation;
+}
+
+/* Overlay para mejorar la legibilidad */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 100%;
+    background: transparent;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.character-video-container {
+    width: 100%;
+    height: 300px;
+    border-radius: 25px;
+    overflow: hidden;
+    margin-top: auto;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    position: relative;
+    border: 4px solid #ff69b4;
+    background: linear-gradient(45deg, #ff69b4, #ff1493, #ff69b4);
+    background-size: 300% 300%;
+    animation: gradientShift 3s ease infinite;
+    padding: 4px;
+    order: 2;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+#character-video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.dialogue-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    min-height: 60vh;
+    padding: 20px 0;
+    order: 1;
+}
+
+.dialogue-box {
+    background: transparent;
+    border: none;
+    padding: 30px;
+    width: 100%;
+    position: relative;
+    text-align: center;
+}
+
+.character-name {
+    display: none;
+}
+
+#dialogue-text {
+    font-size: 24px;
+    line-height: 1.6;
+    color: white;
+    font-weight: 800;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9), 0 0 15px rgba(255, 255, 255, 0.3);
+    animation: fadeIn 0.5s ease-in-out;
+    font-family: 'Arial Black', sans-serif;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(10px);
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0);
+    }
+}
+
+.final-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    order: 3;
+}
+
+.yes-button, .no-button {
+    padding: 18px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 140px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.yes-button {
+    background: linear-gradient(135deg, #32cd32, #228b22);
+    color: white;
+}
+
+.yes-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(50, 205, 50, 0.4);
+}
+
+.no-button {
+    background: linear-gradient(135deg, #ff6b6b, #ff4757);
+    color: white;
+}
+
+.no-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(255, 107, 107, 0.4);
+}
+
+.instructions {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+.hearts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.heart {
+    position: absolute;
+    color: #ff69b4;
+    font-size: 25px;
+    animation: float 4s ease-in-out infinite;
+    opacity: 0.8;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Animaciones especiales */
+.celebration {
+    animation: celebration 0.8s ease-in-out;
+}
+
+@keyframes celebration {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Efecto de parpadeo para el video */
+.video-transition {
+    animation: videoTransition 0.3s ease-in-out;
+}
+
+@keyframes videoTransition {
+    0% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+/* Responsive para móviles */
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+    
+    .game-container {
+        padding: 10px;
+        min-height: 100vh;
+    }
+    
+    .character-video-container {
+        height: 250px;
+        margin-bottom: 15px;
+    }
+    
+    .character-name {
+        font-size: 24px;
+    }
+    
+    #dialogue-text {
+        font-size: 20px;
+        line-height: 1.5;
+    }
+    
+    .yes-button, .no-button {
+        font-size: 18px;
+        padding: 15px 25px;
+        min-width: 120px;
+    }
+    
+    .instructions {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+    
+    .dialogue-container {
+        min-height: 50vh;
+    }
+}
+
+@media (max-width: 360px) {
+    .character-video-container {
+        height: 220px;
+    }
+    
+    .character-name {
+        font-size: 20px;
+    }
+    
+    #dialogue-text {
+        font-size: 18px;
+    }
+    
+    .yes-button, .no-button {
+        font-size: 16px;
+        padding: 12px 20px;
+        min-width: 100px;
+    }
+    
+    .dialogue-container {
+        min-height: 45vh;
+    }
+}
+
+/* Pantalla de final feliz */
+.happy-ending {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('happy-end.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.happy-ending::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+}
+
+.congratulations-container {
+    text-align: center;
+    z-index: 10;
+    animation: celebrationEntrance 1s ease-out;
+}
+
+.congratulations-title {
+    font-size: 48px;
+    font-weight: 900;
+    color: white;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 105, 180, 0.8);
+    margin-bottom: 20px;
+    font-family: 'Arial Black', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    animation: titlePulse 2s ease-in-out infinite;
+}
+
+.congratulations-subtitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ff69b4;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    margin-bottom: 30px;
+    font-family: 'Arial', sans-serif;
+    animation: subtitleGlow 3s ease-in-out infinite;
+}
+
+.happy-hearts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.happy-heart {
+    position: absolute;
+    color: #ff69b4;
+    font-size: 30px;
+    animation: happyFloat 4s ease-in-out infinite;
+    opacity: 0.9;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes celebrationEntrance {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateY(50px);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1) translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes titlePulse {
+    0%, 100% {
+        transform: scale(1);
+        text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 105, 180, 0.8);
+    }
+    50% {
+        transform: scale(1.05);
+        text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 105, 180, 1);
+    }
+}
+
+@keyframes subtitleGlow {
+    0%, 100% {
+        color: #ff69b4;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    }
+    50% {
+        color: #ff1493;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 20, 147, 0.8);
+    }
+}
+
+@keyframes happyFloat {
+    0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.5);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.9;
+    }
+    50% {
+        transform: translateY(50vh) rotate(180deg) scale(1.2);
+        opacity: 0.9;
+    }
+    90% {
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg) scale(0.8);
+        opacity: 0;
+    }
+}
+
+/* Responsive para pantalla de final feliz */
+@media (max-width: 480px) {
+    .congratulations-title {
+        font-size: 36px;
+        letter-spacing: 2px;
+    }
+    
+    .congratulations-subtitle {
+        font-size: 20px;
+    }
+    
+    .happy-heart {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 360px) {
+    .congratulations-title {
+        font-size: 28px;
+        letter-spacing: 1px;
+    }
+    
+    .congratulations-subtitle {
+        font-size: 18px;
+    }
+    
+    .happy-heart {
+        font-size: 20px;
+    }
+}
+
+/* Pantalla de final triste */
+.sad-ending {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('sad-end.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.sad-ending::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
+
+/* Botón SÍ centrado */
+.centered-yes-button {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 40px;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #32cd32, #228b22);
+    color: white;
+    box-shadow: 0 8px 20px rgba(50, 205, 50, 0.4);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+    animation: yesButtonPulse 1.5s ease-in-out infinite;
+}
+
+.centered-yes-button:hover {
+    transform: translate(-50%, -50%) translateY(-3px);
+    box-shadow: 0 12px 25px rgba(50, 205, 50, 0.6);
+}
+
+@keyframes yesButtonPulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 8px 20px rgba(50, 205, 50, 0.4);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.05);
+        box-shadow: 0 12px 25px rgba(50, 205, 50, 0.6);
+    }
+}
+
+/* Botón NO que se mueve */
+.moving-no-button {
+    position: fixed;
+    padding: 15px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #ff6b6b, #ff4757);
+    color: white;
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 1002;
+    transition: all 0.1s ease;
+    animation: noButtonMove 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes noButtonMove {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(20px, -15px) scale(1.1);
+    }
+    50% {
+        transform: translate(-30px, 10px) scale(0.9);
+    }
+    75% {
+        transform: translate(15px, 25px) scale(1.05);
+    }
+    100% {
+        transform: translate(-20px, -5px) scale(1);
+    }
+}
+
+/* Mensaje de "mejor suerte la próxima vez" */
+.better-luck-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 30px 40px;
+    border-radius: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1003;
+    animation: messageAppear 0.5s ease-out;
+    border: 3px solid #ff6b6b;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+@keyframes messageAppear {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Responsive para pantalla triste */
+@media (max-width: 480px) {
+    .centered-yes-button {
+        font-size: 20px;
+        padding: 15px 30px;
+    }
+    
+    .moving-no-button {
+        font-size: 18px;
+        padding: 12px 25px;
+    }
+    
+    .better-luck-message {
+        font-size: 24px;
+        padding: 25px 30px;
+    }
+}
+
+@media (max-width: 360px) {
+    .centered-yes-button {
+        font-size: 18px;
+        padding: 12px 25px;
+    }
+    
+    .moving-no-button {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+    
+    .better-luck-message {
+        font-size: 20px;
+        padding: 20px 25px;
+    }
+}
+
+/* Prevenir selección de texto en móviles */
+* {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}

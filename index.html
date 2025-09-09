@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💕 Una Historia Especial 💕</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Video del personaje actual -->
+        <div class="character-video-container">
+            <video id="character-video" autoplay muted loop>
+                <source src="he-talks.mp4" type="video/mp4">
+            </video>
+        </div>
+        
+        <!-- Diálogo -->
+        <div class="dialogue-container">
+            <div class="dialogue-box">
+                <p id="dialogue-text">¿Tú sabías que las palomas son drones del gobierno? 🤨</p>
+            </div>
+        </div>
+        
+        <!-- Botones finales -->
+        <div class="final-buttons" id="final-buttons" style="display: none;">
+            <button id="yes-btn" class="yes-button">¡SÍ! 💕</button>
+            <button id="no-btn" class="no-button">No 😢</button>
+        </div>
+        
+        <!-- Instrucciones -->
+        <div class="instructions" id="instructions">
+            <p>👆 Toca la pantalla para continuar</p>
+        </div>
+        
+        <!-- Efectos de corazones -->
+        <div class="hearts" id="hearts"></div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
