@@ -49,7 +49,6 @@ const dialogueElement = document.getElementById('dialogue-text');
 const characterVideo = document.getElementById('character-video');
 const instructions = document.getElementById('instructions');
 const chapterAnimation = document.getElementById('chapter-animation');
-const nextButton = document.getElementById('next-chapter-button');
 
 function showNextDialogue() {
     if (currentDialogue < dialogues.length) {
@@ -108,20 +107,11 @@ function showChapterAnimation() {
             }
             img.src = chapterConfig.endAnimation;
         }
-        setTimeout(() => {
-            nextButton.style.display = 'block';
-        }, 3000);
-    } else {
-        nextButton.style.display = 'block';
+        // Animación mostrada
     }
 }
 
 document.addEventListener('click', (e) => {
-    if (e.target.id === 'next-chapter-button') {
-        window.location.href = chapterConfig.nextChapter;
-        return;
-    }
-    
     if (currentDialogue < dialogues.length) {
         showNextDialogue();
     }

@@ -42,8 +42,8 @@ const dialogues = [
 ];
 
 const chapterConfig = {
-    background: "../shared/main_background.jpg",
-    endAnimation: "../shared/him_and_her_encounter_dragon.png",
+    background: "../shared/dragon-cave.jpg",
+    endAnimation: "../shared/dragon-defeated.png",
     endAnimationType: "image",
     nextChapter: "../part9/index.html"
 };
@@ -53,7 +53,6 @@ const dialogueElement = document.getElementById('dialogue-text');
 const characterVideo = document.getElementById('character-video');
 const instructions = document.getElementById('instructions');
 const chapterAnimation = document.getElementById('chapter-animation');
-const nextButton = document.getElementById('next-chapter-button');
 
 function showNextDialogue() {
     if (currentDialogue < dialogues.length) {
@@ -119,20 +118,11 @@ function showChapterAnimation() {
             }
             img.src = chapterConfig.endAnimation;
         }
-        setTimeout(() => {
-            nextButton.style.display = 'block';
-        }, 3000);
-    } else {
-        nextButton.style.display = 'block';
+        // Animación mostrada
     }
 }
 
 document.addEventListener('click', (e) => {
-    if (e.target.id === 'next-chapter-button') {
-        window.location.href = chapterConfig.nextChapter;
-        return;
-    }
-    
     if (currentDialogue < dialogues.length) {
         showNextDialogue();
     }

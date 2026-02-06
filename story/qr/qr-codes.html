@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Códigos QR - Enemigos, Dragones y una Pésima Idea</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        .qr-page {
+            width: 210mm;
+            height: 297mm;
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .qr-page:last-child {
+            page-break-after: auto;
+        }
+
+        .qr-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .qr-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Arial Black', sans-serif;
+        }
+
+        .qr-border {
+            position: relative;
+            padding: 12px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+            border-radius: 15px;
+            box-shadow: 
+                0 0 0 3px #8b4513,
+                0 0 0 6px #ffd700,
+                0 0 0 9px #8b4513,
+                0 4px 15px rgba(0, 0, 0, 0.3),
+                inset 0 2px 5px rgba(255, 255, 255, 0.5);
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(139, 69, 19, 0.1) 10px, rgba(139, 69, 19, 0.1) 20px);
+        }
+
+        .qr-border::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border: 2px solid #8b4513;
+            border-radius: 18px;
+            z-index: -1;
+        }
+
+
+        .qr-image {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            background: white;
+            padding: 5px;
+        }
+
+        /* Decoración de esquinas */
+        .qr-border .corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #8b4513;
+        }
+
+        .qr-border .corner.top-left {
+            top: 5px;
+            left: 5px;
+            border-right: none;
+            border-bottom: none;
+            border-top-left-radius: 8px;
+        }
+
+        .qr-border .corner.top-right {
+            top: 5px;
+            right: 5px;
+            border-left: none;
+            border-bottom: none;
+            border-top-right-radius: 8px;
+        }
+
+        .qr-border .corner.bottom-left {
+            bottom: 5px;
+            left: 5px;
+            border-right: none;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+        }
+
+        .qr-border .corner.bottom-right {
+            bottom: 5px;
+            right: 5px;
+            border-left: none;
+            border-top: none;
+            border-bottom-right-radius: 8px;
+        }
+
+        /* Estilos para impresión/PDF */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+
+            .qr-page {
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+
+            .qr-page:last-child {
+                page-break-after: auto;
+            }
+
+            .qr-image {
+                max-width: 200px;
+            }
+        }
+
+        /* Responsive para pantalla */
+        @media screen {
+            .qr-page {
+                border-bottom: 1px solid #ddd;
+                min-height: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="qr-page">
+        <div class="qr-item">
+            <div class="qr-title">Parte 1</div>
+            <div class="qr-border">
+                <span class="corner top-left"></span>
+                <span class="corner top-right"></span>
+                <span class="corner bottom-left"></span>
+                <span class="corner bottom-right"></span>
+                <img src="frame1.png" alt="QR Code Parte 1" class="qr-image">
+            </div>
+        </div>
+    </div>
+
+    <div class="qr-page">
+        <div class="qr-item">
+            <div class="qr-title">Parte 2</div>
+            <div class="qr-border">
+                <span class="corner top-left"></span>
+                <span class="corner top-right"></span>
+                <span class="corner bottom-left"></span>
+                <span class="corner bottom-right"></span>
+                <img src="frame2.png" alt="QR Code Parte 2" class="qr-image">
+            </div>
+        </div>
+    </div>
+
+    <div class="qr-page">
+        <div class="qr-item">
+            <div class="qr-title">Parte 3</div>
+            <div class="qr-border">
+                <span class="corner top-left"></span>
+                <span class="corner top-right"></span>
+                <span class="corner bottom-left"></span>
+                <span class="corner bottom-right"></span>
+                <img src="frame3.png" alt="QR Code Parte 3" class="qr-image">
+            </div>
+        </div>
+    </div>
+
+    <div class="qr-page">
+        <div class="qr-item">
+            <div class="qr-title">Parte 4</div>
+            <div class="qr-border">
+                <span class="corner top-left"></span>
+                <span class="corner top-right"></span>
+                <span class="corner bottom-left"></span>
+                <span class="corner bottom-right"></span>
+                <img src="frame4.png" alt="QR Code Parte 4" class="qr-image">
+            </div>
+        </div>
+    </div>
+
+    <div class="qr-page">
+        <div class="qr-item">
+            <div class="qr-title">Parte 5</div>
+            <div class="qr-border">
+                <span class="corner top-left"></span>
+                <span class="corner top-right"></span>
+                <span class="corner bottom-left"></span>
+                <span class="corner bottom-right"></span>
+                <img src="frame5.png" alt="QR Code Parte 5" class="qr-image">
+            </div>
+        </div>
+    </div>
+
+    <div class="qr-page">
+        <div class="qr-item">
+            <div class="qr-title">Parte 6</div>
+            <div class="qr-border">
+                <span class="corner top-left"></span>
+                <span class="corner top-right"></span>
+                <span class="corner bottom-left"></span>
+                <span class="corner bottom-right"></span>
+                <img src="frame6.png" alt="QR Code Parte 6" class="qr-image">
+            </div>
+        </div>
+    </div>
+
+    <div class="qr-page">
+        <div class="qr-item">
+            <div class="qr-title">Parte 7</div>
+            <div class="qr-border">
+                <span class="corner top-left"></span>
+                <span class="corner top-right"></span>
+                <span class="corner bottom-left"></span>
+                <span class="corner bottom-right"></span>
+                <img src="frame7.png" alt="QR Code Parte 7" class="qr-image">
+            </div>
+        </div>
+    </div>
+
+    <div class="qr-page">
+        <div class="qr-item">
+            <div class="qr-title">Parte 8</div>
+            <div class="qr-border">
+                <span class="corner top-left"></span>
+                <span class="corner top-right"></span>
+                <span class="corner bottom-left"></span>
+                <span class="corner bottom-right"></span>
+                <img src="frame8.png" alt="QR Code Parte 8" class="qr-image">
+            </div>
+        </div>
+    </div>
+
+    <div class="qr-page">
+        <div class="qr-item">
+            <div class="qr-title">Parte 9</div>
+            <div class="qr-border">
+                <span class="corner top-left"></span>
+                <span class="corner top-right"></span>
+                <span class="corner bottom-left"></span>
+                <span class="corner bottom-right"></span>
+                <img src="frame9.png" alt="QR Code Parte 9" class="qr-image">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

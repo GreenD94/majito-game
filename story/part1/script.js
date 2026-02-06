@@ -7,12 +7,12 @@ const dialogues = [
     },
     {
         character: "Tú",
-        text: "Fantasía épica. Dragones. Odio mutuo.",
+        text: "Es que estamos en unaa fantasía épica. de Dragones y Odio mutuo.",
         video: "../shared/him-knight-talking.mp4"
     },
     {
         character: "Ella",
-        text: "Ah. Claro. Porque eso siempre termina mal.",
+        text: "Ah. Claro. eso siempre termina mal.",
         video: "../shared/her-wizard-talking.mp4"
     },
     {
@@ -22,7 +22,7 @@ const dialogues = [
     },
     {
         character: "Ella",
-        text: "No confíes.",
+        text: "No confíes en eso.",
         video: "../shared/her-wizard-talking.mp4"
     }
 ];
@@ -40,7 +40,6 @@ const dialogueElement = document.getElementById('dialogue-text');
 const characterVideo = document.getElementById('character-video');
 const instructions = document.getElementById('instructions');
 const chapterAnimation = document.getElementById('chapter-animation');
-const nextButton = document.getElementById('next-chapter-button');
 
 // Función para mostrar el siguiente diálogo
 function showNextDialogue() {
@@ -109,23 +108,12 @@ function showChapterAnimation() {
             img.src = chapterConfig.endAnimation;
         }
         
-        // Mostrar botón para continuar después de 3 segundos
-        setTimeout(() => {
-            nextButton.style.display = 'block';
-        }, 3000);
-    } else {
-        // Si no hay animación, mostrar botón directamente
-        nextButton.style.display = 'block';
+        // Animación mostrada, no hay botón de navegación
     }
 }
 
 // Event listeners
 document.addEventListener('click', (e) => {
-    if (e.target.id === 'next-chapter-button') {
-        window.location.href = chapterConfig.nextChapter;
-        return;
-    }
-    
     if (currentDialogue < dialogues.length) {
         showNextDialogue();
     }

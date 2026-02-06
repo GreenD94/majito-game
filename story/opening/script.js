@@ -21,6 +21,7 @@ const dialogueElement = document.getElementById('dialogue-text');
 const characterVideo = document.getElementById('character-video');
 const instructions = document.getElementById('instructions');
 const gameContainer = document.querySelector('.game-container');
+const continueButton = document.getElementById('continue-button');
 
 // Función para mostrar el siguiente diálogo
 function showNextDialogue() {
@@ -29,24 +30,26 @@ function showNextDialogue() {
         
         // Si es un título, mostrarlo de forma especial
         if (dialogue.type === "title") {
-            dialogueElement.className = "title-text";
+            // Resetear estilos inline que puedan interferir
+            dialogueElement.style.opacity = '';
+            dialogueElement.style.transform = '';
+            dialogueElement.style.filter = '';
+            
+            // Aplicar la clase animada
+            dialogueElement.className = "title-animated";
             dialogueElement.textContent = dialogue.text;
-            dialogueElement.style.opacity = '0';
-            setTimeout(() => {
-                dialogueElement.style.opacity = '1';
-            }, 200);
             
             // Ocultar video para el título
             document.querySelector('.character-video-container').style.display = 'none';
             
             currentDialogue++;
             
-            // Después del título, ir a la parte 1
+            // Después del título, mostrar botón de continuar
             if (currentDialogue === dialogues.length) {
                 instructions.style.display = 'none';
                 setTimeout(() => {
-                    window.location.href = '../part1/index.html';
-                }, 3000);
+                    continueButton.style.display = 'block';
+                }, 1500);
             }
             return;
         }
@@ -77,8 +80,16 @@ function showNextDialogue() {
     }
 }
 
+// Event listener para el botón de continuar
+continueButton.addEventListener('click', () => {
+    window.location.href = '../part1/index.html';
+});
+
 // Event listeners para tocar la pantalla
 document.addEventListener('click', (e) => {
+    // No avanzar si se toca el botón de continuar
+    if (e.target === continueButton) return;
+    
     if (currentDialogue < dialogues.length) {
         showNextDialogue();
     }

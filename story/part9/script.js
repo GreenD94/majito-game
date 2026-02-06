@@ -12,12 +12,12 @@ const dialogues = [
     },
     {
         character: "Ella",
-        text: "Yo no bailo.",
+        text: "sabes, que yo no bailo.",
         video: "../shared/her-wizard-talking.mp4"
     },
     {
         character: "Tú",
-        text: "Tú real no.",
+        text: "Tú yo de la vidareal no.",
         video: "../shared/him-knight-talking.mp4"
     },
     {
@@ -32,13 +32,23 @@ const dialogues = [
     },
     {
         character: "Ella",
-        text: "Ven acá entonces.",
+        text: "jajaja.",
         video: "../shared/her-wizard-talking.mp4"
-    }
+    },
+    {
+        character: "Tú",
+        text: "wow, si que sabes bailar.",
+        video: "../shared/him-knight-talking.mp4"
+    },
+    {
+        character: "Ella",
+        text: "wow, tu tambien sabes bailar.",
+        video: "../shared/her-wizard-talking.mp4"
+    },
 ];
 
 const chapterConfig = {
-    background: "../shared/main_background.jpg",
+    background: "../shared/castle-dance-hall.jpg",
     endAnimation: "../shared/him_and_her_dancing.mp4",
     endAnimationType: "video",
     nextChapter: "../../index.html" // Volver al inicio o a una página final
@@ -49,7 +59,7 @@ const dialogueElement = document.getElementById('dialogue-text');
 const characterVideo = document.getElementById('character-video');
 const instructions = document.getElementById('instructions');
 const chapterAnimation = document.getElementById('chapter-animation');
-const nextButton = document.getElementById('next-chapter-button');
+const finalTitle = document.getElementById('final-title');
 
 function showNextDialogue() {
     if (currentDialogue < dialogues.length) {
@@ -111,22 +121,28 @@ function showChapterAnimation() {
             img.src = chapterConfig.endAnimation;
         }
         
-        // Mostrar botón para continuar después de 3 segundos
+        // Mostrar título final después de 3 segundos
         setTimeout(() => {
-            nextButton.style.display = 'block';
+            showFinalTitle();
         }, 3000);
     } else {
-        // Si no hay animación, mostrar botón directamente
-        nextButton.style.display = 'block';
+        // Si no hay animación, mostrar título directamente
+        setTimeout(() => {
+            showFinalTitle();
+        }, 1000);
     }
 }
 
+function showFinalTitle() {
+    finalTitle.style.display = 'flex';
+    // Resetear estilos inline para que la animación CSS funcione
+    const titleText = finalTitle.querySelector('p');
+    titleText.style.opacity = '';
+    titleText.style.transform = '';
+    titleText.style.filter = '';
+}
+
 document.addEventListener('click', (e) => {
-    if (e.target.id === 'next-chapter-button') {
-        window.location.href = chapterConfig.nextChapter;
-        return;
-    }
-    
     if (currentDialogue < dialogues.length) {
         showNextDialogue();
     }

@@ -6,12 +6,12 @@ const dialogues = [
     },
     {
         character: "Ella",
-        text: "No pienso viajar contigo.",
+        text: "Para esta mision, No pienso viajar contigo.",
         video: "../shared/her-wizard-talking.mp4"
     },
     {
         character: "Tú",
-        text: "El dragón se come el reino si no vamos.",
+        text: "Si no vamos juntos, El dragón se come el reino",
         video: "../shared/him-knight-talking.mp4"
     },
     {
@@ -33,7 +33,7 @@ const dialogues = [
 
 const chapterConfig = {
     background: "../shared/main_background.jpg",
-    endAnimation: "../shared/her_attacking_him.png",
+    endAnimation: "../shared/him-her-walking.png",
     endAnimationType: "image",
     nextChapter: "../part4/index.html"
 };
@@ -43,7 +43,6 @@ const dialogueElement = document.getElementById('dialogue-text');
 const characterVideo = document.getElementById('character-video');
 const instructions = document.getElementById('instructions');
 const chapterAnimation = document.getElementById('chapter-animation');
-const nextButton = document.getElementById('next-chapter-button');
 
 function showNextDialogue() {
     if (currentDialogue < dialogues.length) {
@@ -109,20 +108,11 @@ function showChapterAnimation() {
             }
             img.src = chapterConfig.endAnimation;
         }
-        setTimeout(() => {
-            nextButton.style.display = 'block';
-        }, 3000);
-    } else {
-        nextButton.style.display = 'block';
+        // Animación mostrada
     }
 }
 
 document.addEventListener('click', (e) => {
-    if (e.target.id === 'next-chapter-button') {
-        window.location.href = chapterConfig.nextChapter;
-        return;
-    }
-    
     if (currentDialogue < dialogues.length) {
         showNextDialogue();
     }
