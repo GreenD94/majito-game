@@ -2,37 +2,112 @@
 const dialogues = [
     {
         type: "narration",
-        text: "Ella, maga peligrosa. Él, idiota con espada."
+        text: "Contexto: El reino está en caos. No porque haya guerra… sino porque alguien escribió mal una profecía. El Caballero y la Maga no se soportan, pero los obligan a trabajar juntos."
     },
     {
         character: "Ella",
-        text: "Mantén distancia. No confío en guerreros con cara de problema.",
+        text: "Deja algo claro, Caballero: yo trabajo sola.",
         video: "../shared/her-wizard-talking.mp4"
     },
     {
         character: "Tú",
-        text: "¿Y yo no confío en magas que te juzgan antes de hablar?",
+        text: "Perfecto, porque yo también.",
         video: "../shared/him-knight-talking.mp4"
     },
     {
+        type: "narration",
+        text: "(silencio incómodo)"
+    },
+    {
         character: "Ella",
-        text: "Te juzgo porque tengo razón.",
+        text: "Entonces… ¿por qué estamos aquí juntos?",
         video: "../shared/her-wizard-talking.mp4"
     },
     {
         character: "Tú",
-        text: "Fastidiosa.",
+        text: "Porque el Consejo dijo que si no cooperamos, el reino se va al carajo.",
         video: "../shared/him-knight-talking.mp4"
     },
     {
         character: "Ella",
-        text: "Molesto.",
+        text: "Genial. Castigada con trabajo en grupo.",
+        video: "../shared/her-wizard-talking.mp4"
+    },
+    {
+        character: "Tú",
+        text: "Yo tampoco pedí que me emparejaran con alguien que lanza hechizos cuando se molesta.",
+        video: "../shared/him-knight-talking.mp4"
+    },
+    {
+        character: "Ella",
+        text: "¿Cuando? Yo lanzo hechizos porque puedo.",
+        video: "../shared/her-wizard-talking.mp4"
+    },
+    {
+        type: "narration",
+        text: "(ella hace aparecer chispas)"
+    },
+    {
+        character: "Tú",
+        text: "Ok, ok… sin violencia innecesaria.",
+        video: "../shared/him-knight-talking.mp4"
+    },
+    {
+        type: "narration",
+        text: "(pausa)"
+    },
+    {
+        character: "Tú",
+        text: "Aunque… innecesaria según quién.",
+        video: "../shared/him-knight-talking.mp4"
+    },
+    {
+        character: "Ella",
+        text: "Te voy a convertir en sapo.",
+        video: "../shared/her-wizard-talking.mp4"
+    },
+    {
+        character: "Tú",
+        text: "Ya lo soy emocionalmente.",
+        video: "../shared/him-knight-talking.mp4"
+    },
+    {
+        type: "narration",
+        text: "(ella se ríe sin querer)"
+    },
+    {
+        character: "Ella",
+        text: "No me hagas reír. No me caes bien.",
+        video: "../shared/her-wizard-talking.mp4"
+    },
+    {
+        character: "Tú",
+        text: "Tranquila. A mí tampoco.",
+        video: "../shared/him-knight-talking.mp4"
+    },
+    {
+        type: "narration",
+        text: "(silencio)"
+    },
+    {
+        character: "Ella",
+        text: "…pero caminas raro.",
+        video: "../shared/her-wizard-talking.mp4"
+    },
+    {
+        character: "Tú",
+        text: "Espera, ¿eso es una crítica o coqueteo?",
+        video: "../shared/him-knight-talking.mp4"
+    },
+    {
+        character: "Ella",
+        text: "Es una observación científica.",
         video: "../shared/her-wizard-talking.mp4"
     }
 ];
 
 const chapterConfig = {
-    background: "../shared/main_background.jpg",
+    background: "../shared/library-background.jpg",
     endAnimation: "../shared/her-angry.jpg",
     endAnimationType: "image",
     nextChapter: "../part3/index.html"
