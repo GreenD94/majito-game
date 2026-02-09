@@ -127,11 +127,13 @@ const titanicVideo = document.getElementById('titanic-video');
 const titanicDialogContainer = document.getElementById('titanic-dialog-container');
 const titanicDialogBox = document.getElementById('titanic-dialog-box');
 const titanicDialogText = document.getElementById('titanic-dialog-text');
+const titanicContinueBtn = document.getElementById('titanic-continue-btn');
 const frenchgirlScene = document.getElementById('frenchgirl-scene');
 const frenchgirlVideo = document.getElementById('frenchgirl-video');
 const frenchgirlDialogContainer = document.getElementById('frenchgirl-dialog-container');
 const frenchgirlDialogBox = document.getElementById('frenchgirl-dialog-box');
 const frenchgirlDialogText = document.getElementById('frenchgirl-dialog-text');
+const frenchgirlContinueBtn = document.getElementById('frenchgirl-continue-btn');
 const kissingScene = document.getElementById('kissing-scene');
 const kissingVideo = document.getElementById('kissing-video');
 
@@ -453,6 +455,10 @@ function showTitanicScene() {
     gameEndScreen.style.display = 'none';
     titanicScene.style.display = 'flex';
     
+    // Hide continue button initially
+    if (titanicContinueBtn) titanicContinueBtn.style.display = 'none';
+    if (titanicDialogContainer) titanicDialogContainer.style.display = 'flex';
+    
     // Play video
     titanicVideo.play().catch(e => {
         console.log('Video autoplay bloqueado');
@@ -461,14 +467,20 @@ function showTitanicScene() {
     // Reset dialog index
     currentTitanicDialog = 0;
     
-    // Show first dialog
-    showNextTitanicDialog();
+    // Small delay to ensure DOM is ready
+    setTimeout(() => {
+        showNextTitanicDialog();
+    }, 100);
 }
 
 function showNextTitanicDialog() {
     if (currentTitanicDialog < titanicDialogs.length) {
         const dialog = titanicDialogs[currentTitanicDialog];
         titanicDialogText.textContent = `${dialog.character}: ${dialog.text}`;
+        
+        // Hide continue button and show dialog box
+        if (titanicContinueBtn) titanicContinueBtn.style.display = 'none';
+        if (titanicDialogContainer) titanicDialogContainer.style.display = 'flex';
         
         // Fade in animation
         titanicDialogBox.style.opacity = '0';
@@ -477,9 +489,24 @@ function showNextTitanicDialog() {
         }, 200);
         
         currentTitanicDialog++;
+        
+        // Check if this was the last dialog
+        if (currentTitanicDialog >= titanicDialogs.length) {
+            // All dialogs shown, hide dialog box and show continue button after a delay
+            setTimeout(() => {
+                const container = document.getElementById('titanic-dialog-container');
+                const btn = document.getElementById('titanic-continue-btn');
+                if (container) container.style.display = 'none';
+                if (btn) {
+                    btn.style.display = 'block';
+                    btn.style.zIndex = '20';
+                }
+            }, 500);
+        }
     } else {
-        // All dialogs shown, go to french girl scene
-        showFrenchGirlScene();
+        // All dialogs shown, hide dialog box and show continue button
+        if (titanicDialogContainer) titanicDialogContainer.style.display = 'none';
+        if (titanicContinueBtn) titanicContinueBtn.style.display = 'block';
     }
 }
 
@@ -517,6 +544,11 @@ function showFrenchGirlScene() {
     titanicScene.style.display = 'none';
     frenchgirlScene.style.display = 'flex';
     
+    // Hide continue button initially
+    if (frenchgirlContinueBtn) frenchgirlContinueBtn.style.display = 'none';
+    const dialogContainer = document.getElementById('frenchgirl-dialog-container');
+    if (dialogContainer) dialogContainer.style.display = 'flex';
+    
     // Play video
     frenchgirlVideo.play().catch(e => {
         console.log('Video autoplay bloqueado');
@@ -525,25 +557,57 @@ function showFrenchGirlScene() {
     // Reset dialog index
     currentFrenchGirlDialog = 0;
     
-    // Show first dialog
-    showNextFrenchGirlDialog();
+    // Small delay to ensure DOM is ready
+    setTimeout(() => {
+        showNextFrenchGirlDialog();
+    }, 100);
 }
 
 function showNextFrenchGirlDialog() {
     if (currentFrenchGirlDialog < frenchgirlDialogs.length) {
         const dialog = frenchgirlDialogs[currentFrenchGirlDialog];
-        frenchgirlDialogText.textContent = `${dialog.character}: ${dialog.text}`;
+        
+        // Get element directly to ensure it exists
+        const dialogTextElement = document.getElementById('frenchgirl-dialog-text');
+        const dialogBoxElement = document.getElementById('frenchgirl-dialog-box');
+        const dialogContainer = document.getElementById('frenchgirl-dialog-container');
+        
+        if (dialogTextElement) {
+            dialogTextElement.textContent = `${dialog.character}: ${dialog.text}`;
+        }
+        
+        // Hide continue button and show dialog box
+        if (frenchgirlContinueBtn) frenchgirlContinueBtn.style.display = 'none';
+        if (dialogContainer) dialogContainer.style.display = 'flex';
         
         // Fade in animation
-        frenchgirlDialogBox.style.opacity = '0';
-        setTimeout(() => {
-            frenchgirlDialogBox.style.opacity = '1';
-        }, 200);
+        if (dialogBoxElement) {
+            dialogBoxElement.style.opacity = '0';
+            setTimeout(() => {
+                dialogBoxElement.style.opacity = '1';
+            }, 200);
+        }
         
         currentFrenchGirlDialog++;
+        
+        // Check if this was the last dialog
+        if (currentFrenchGirlDialog >= frenchgirlDialogs.length) {
+            // All dialogs shown, hide dialog box and show continue button after a delay
+            setTimeout(() => {
+                const container = document.getElementById('frenchgirl-dialog-container');
+                const btn = document.getElementById('frenchgirl-continue-btn');
+                if (container) container.style.display = 'none';
+                if (btn) {
+                    btn.style.display = 'block';
+                    btn.style.zIndex = '20';
+                }
+            }, 500);
+        }
     } else {
-        // All dialogs shown, go to kissing scene
-        showKissingScene();
+        // All dialogs shown, hide dialog box and show continue button
+        const dialogContainer = document.getElementById('frenchgirl-dialog-container');
+        if (dialogContainer) dialogContainer.style.display = 'none';
+        if (frenchgirlContinueBtn) frenchgirlContinueBtn.style.display = 'block';
     }
 }
 
@@ -682,21 +746,53 @@ document.addEventListener('contextmenu', function(event) {
 
 // Click handler for titanic scene
 if (titanicScene) {
-    titanicScene.addEventListener('click', () => {
+    titanicScene.addEventListener('click', (e) => {
+        // Don't trigger if clicking the continue button
+        if (e.target === titanicContinueBtn || e.target.closest('.continue-button')) return;
+        
         if (currentTitanicDialog < titanicDialogs.length) {
             showNextTitanicDialog();
         } else {
-            // All dialogs shown, go to next scene
-            showFrenchGirlScene();
+            // If all dialogs shown but continue button not visible, show it
+            if (titanicDialogContainer && titanicDialogContainer.style.display !== 'none') {
+                if (titanicDialogContainer) titanicDialogContainer.style.display = 'none';
+                if (titanicContinueBtn) titanicContinueBtn.style.display = 'block';
+            }
         }
+    });
+}
+
+// Continue button handler for titanic scene
+if (titanicContinueBtn) {
+    titanicContinueBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showFrenchGirlScene();
     });
 }
 
 // Click handler for french girl scene
 if (frenchgirlScene) {
-    frenchgirlScene.addEventListener('click', () => {
+    frenchgirlScene.addEventListener('click', (e) => {
+        // Don't trigger if clicking the continue button
+        if (e.target === frenchgirlContinueBtn || e.target.closest('.continue-button')) return;
+        
         if (currentFrenchGirlDialog < frenchgirlDialogs.length) {
             showNextFrenchGirlDialog();
+        } else {
+            // If all dialogs shown but continue button not visible, show it
+            const dialogContainer = document.getElementById('frenchgirl-dialog-container');
+            if (dialogContainer && dialogContainer.style.display !== 'none') {
+                if (dialogContainer) dialogContainer.style.display = 'none';
+                if (frenchgirlContinueBtn) frenchgirlContinueBtn.style.display = 'block';
+            }
         }
+    });
+}
+
+// Continue button handler for french girl scene
+if (frenchgirlContinueBtn) {
+    frenchgirlContinueBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showKissingScene();
     });
 }

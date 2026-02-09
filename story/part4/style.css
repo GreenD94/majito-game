@@ -613,7 +613,8 @@ body {
     transition: opacity 0.3s ease-in-out;
 }
 
-#titanic-dialog-text {
+#titanic-dialog-text,
+#frenchgirl-dialog-text {
     color: white;
     font-size: 22px;
     font-weight: bold;
@@ -630,6 +631,60 @@ body {
     }
 
     #titanic-dialog-text {
+        font-size: 18px;
+    }
+}
+
+/* Continue Button */
+.continue-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    color: white;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    border-radius: 25px;
+    padding: 15px 40px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 105, 180, 0.4);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    animation: pulseButton 2s ease-in-out infinite;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.continue-button:hover {
+    transform: translate(-50%, -50%) translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 105, 180, 0.6);
+    background: linear-gradient(135deg, #ff1493, #ff69b4);
+}
+
+.continue-button:active {
+    transform: translate(-50%, -50%) translateY(-1px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 105, 180, 0.4);
+}
+
+@keyframes pulseButton {
+    0%, 100% {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 105, 180, 0.4);
+    }
+    50% {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 105, 180, 0.7);
+    }
+}
+
+@media (max-width: 480px) {
+    .continue-button {
+        padding: 12px 30px;
+        font-size: 18px;
+    }
+
+    #frenchgirl-dialog-text {
         font-size: 18px;
     }
 }
