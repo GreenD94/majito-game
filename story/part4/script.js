@@ -314,7 +314,7 @@ function showResult(winner) {
     if (winner === 'player') {
         // Player wins - but knight will cheat!
         gameState.playerRealWins++;
-        showResultImage('mage-winning-round.png', 'Ella: ¡Gané!');
+        showResultImage('mage-winning-round.png', 'Maga: ¡Gané!');
         
         setTimeout(() => {
             hideResultImage();
@@ -326,13 +326,13 @@ function showResult(winner) {
         
         // Check if knight won 3 times
         if (gameState.knightScore >= 3) {
-            showResultImage('mage-losing-round.png', 'Ella: No, he perdido esta ronda.');
+            showResultImage('mage-losing-round.png', 'Maga: No, he perdido esta ronda.');
             setTimeout(() => {
                 hideResultImage();
                 endGame();
             }, 3000);
         } else {
-            showResultImage('mage-losing-round.png', 'Ella: No, he perdido esta ronda.');
+            showResultImage('mage-losing-round.png', 'Maga: No, he perdido esta ronda.');
             setTimeout(() => {
                 hideResultImage();
                 gameState.round++;
@@ -373,7 +373,7 @@ function handleKnightCheating() {
     
     setTimeout(() => {
         hideResultImage();
-        showResultImage('mage-winning-round.png', 'Ella: No, no perdí, yo gané.');
+        showResultImage('mage-winning-round.png', 'Maga: No, no perdí, yo gané.');
     }, 3000);
     
     setTimeout(() => {
@@ -385,7 +385,7 @@ function handleKnightCheating() {
         hideResultImage();
         const losingOption = getLosingOption(gameState.currentPlayerChoice);
         const optionName = choices[losingOption].name;
-        showResultImage('mage-losing-round.png', `Ella: Eso es trampa, tú habías elegido ${optionName}.`);
+        showResultImage('mage-losing-round.png', `Maga: Eso es trampa, tú habías elegido ${optionName}.`);
     }, 9000);
     
     setTimeout(() => {
@@ -414,7 +414,7 @@ const titanicDialogs = [
         text: "Sujétate, no te sueltes. Con tus ojos cerrados."
     },
     {
-        character: "Ella",
+        character: "Maga",
         text: "Jajajajaj"
     },
     {
@@ -422,7 +422,7 @@ const titanicDialogs = [
         text: "Confía en mí."
     },
     {
-        character: "Ella",
+        character: "Maga",
         text: "No, no confío en ti."
     },
     {
@@ -430,7 +430,7 @@ const titanicDialogs = [
         text: "Entonces abre los ojos."
     },
     {
-        character: "Ella",
+        character: "Maga",
         text: "Estoy volando jajajaja."
     },
     {
@@ -438,7 +438,7 @@ const titanicDialogs = [
         text: "Ves, sabía que te gustaría."
     },
     {
-        character: "Ella",
+        character: "Maga",
         text: "Me encanta. Aunque es cómico, tú y yo en la vida real le daría miedo esto."
     },
     {
@@ -486,7 +486,7 @@ function showNextTitanicDialog() {
 // French Girl scene dialogs
 const frenchgirlDialogs = [
     {
-        character: "Ella",
+        character: "Maga",
         text: "No se supone que te debo pintar como una modelo francesa?"
     },
     {
@@ -494,7 +494,7 @@ const frenchgirlDialogs = [
         text: "Sí"
     },
     {
-        character: "Ella",
+        character: "Maga",
         text: "Desnúdate pues"
     },
     {
@@ -502,7 +502,7 @@ const frenchgirlDialogs = [
         text: "Te tocará pintarme durmiendo así. Estoy muy agotado, crear estas escenas con IA no es fácil"
     },
     {
-        character: "Ella",
+        character: "Maga",
         text: "Jajaja sí lo noté, cada vez nos parecemos menos a nuestros yo reales."
     },
     {
@@ -578,7 +578,7 @@ function endGame() {
             // Mage speaking
             knightWinningImg.style.display = 'none';
             mageLosingImg.style.display = 'block';
-            gameEndText.textContent = 'Ella: ¡TRAMPOSOOOOO!!';
+            gameEndText.textContent = 'Maga: ¡TRAMPOSOOOOO!!';
             dialogIndex++;
         } else if (dialogIndex === 2) {
             // Knight speaking again
@@ -685,6 +685,9 @@ if (titanicScene) {
     titanicScene.addEventListener('click', () => {
         if (currentTitanicDialog < titanicDialogs.length) {
             showNextTitanicDialog();
+        } else {
+            // All dialogs shown, go to next scene
+            showFrenchGirlScene();
         }
     });
 }
