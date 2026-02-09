@@ -9,25 +9,145 @@
 </head>
 <body>
     <div class="game-container">
-        <div class="character-video-container">
-            <video id="character-video" autoplay muted loop>
-                <source src="../shared/her-wizard-talking.mp4" type="video/mp4">
-            </video>
+        <!-- Title Screen -->
+        <div class="title-screen" id="title-screen">
+            <h1 class="chapter-title">Parte 4: Resolución a los Golpes</h1>
         </div>
-        
-        <div class="dialogue-container">
-            <div class="dialogue-box">
-                <p id="dialogue-text">Caminas raro.</p>
+
+        <!-- Dialogue Phase -->
+        <div class="dialogue-phase" id="dialogue-phase">
+            <div class="character-video-container">
+                <video id="character-video" autoplay muted loop>
+                    <source src="../shared/her-wizard-talking.mp4" type="video/mp4">
+                </video>
+            </div>
+            
+            <div class="dialogue-container">
+                <div class="dialogue-box">
+                    <p id="dialogue-text"></p>
+                </div>
+            </div>
+            
+            <div class="instructions" id="instructions">
+                <p>👆 Toca la pantalla para continuar</p>
+            </div>
+        </div>
+
+        <!-- Game Phase -->
+        <div class="game-phase" id="game-phase" style="display: none;">
+            <div class="game-header">
+                <div class="score-container">
+                    <div class="score-item">
+                        <span class="score-label">Tú (Maga)</span>
+                        <span class="score-value" id="player-score">0</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Caballero</span>
+                        <span class="score-value" id="knight-score">0</span>
+                    </div>
+                </div>
+                <div class="round-info" id="round-info">Ronda 1</div>
+            </div>
+
+            <!-- Choosing Animation Overlay -->
+            <div class="choosing-animation" id="choosing-animation" style="display: none;">
+                <div class="choosing-center">
+                    <h2 class="choosing-text">Piedra, Papel o Tijeras</h2>
+                </div>
+                <div class="choosing-images-container">
+                    <div class="choosing-left">
+                        <img src="../shared/mage-choosing.png" alt="Mage choosing" id="mage-choosing-img">
+                    </div>
+                    <div class="choosing-right">
+                        <img src="../shared/knight-choosing.png" alt="Knight choosing" id="knight-choosing-img">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-area">
+                <div class="choices-display">
+                    <div class="choice-display player-choice">
+                        <div class="choice-icon" id="player-choice-icon">?</div>
+                        <div class="choice-label">Tu elección</div>
+                    </div>
+                    <div class="vs-divider">VS</div>
+                    <div class="choice-display knight-choice">
+                        <div class="choice-icon" id="knight-choice-icon">?</div>
+                        <div class="choice-label">Caballero</div>
+                    </div>
+                </div>
+
+                <div class="game-result" id="game-result"></div>
+
+                <div class="game-choices" id="game-choices">
+                    <button class="choice-btn" data-choice="rock" id="rock-btn">
+                        <span class="choice-emoji">✊</span>
+                        <span class="choice-name">Piedra</span>
+                    </button>
+                    <button class="choice-btn" data-choice="paper" id="paper-btn">
+                        <span class="choice-emoji">✋</span>
+                        <span class="choice-name">Papel</span>
+                    </button>
+                    <button class="choice-btn" data-choice="scissors" id="scissors-btn">
+                        <span class="choice-emoji">✌️</span>
+                        <span class="choice-name">Tijera</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Result Image Display with Dialog Bubble -->
+            <div class="result-image-container" id="result-image-container" style="display: none;">
+                <img id="result-image" src="" alt="Round result">
+                <div class="dialog-bubble" id="dialog-bubble">
+                    <p id="dialog-text"></p>
+                </div>
             </div>
         </div>
         
-        <div class="instructions" id="instructions">
-            <p>👆 Toca la pantalla para continuar</p>
+        <!-- Game End Screen -->
+        <div class="game-end-screen" id="game-end-screen" style="display: none;">
+            <div class="game-end-images">
+                <img src="../shared/knight-winning-game.png" alt="Knight winning" id="knight-winning-img" style="display: none;">
+                <img src="../shared/mage-losing-game.png" alt="Mage losing" id="mage-losing-img" style="display: none;">
+            </div>
+            <div class="game-end-dialog" id="game-end-dialog">
+                <p id="game-end-text"></p>
+            </div>
+        </div>
+
+        <!-- Titanic Scene -->
+        <div class="titanic-scene" id="titanic-scene" style="display: none;">
+            <video id="titanic-video" autoplay muted loop>
+                <source src="../shared/mage-knight-titanic-flying.mp4" type="video/mp4">
+            </video>
+            <div class="titanic-dialog-container" id="titanic-dialog-container">
+                <div class="titanic-dialog-box" id="titanic-dialog-box">
+                    <p id="titanic-dialog-text"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- French Girl Scene -->
+        <div class="titanic-scene" id="frenchgirl-scene" style="display: none;">
+            <video id="frenchgirl-video" autoplay muted loop>
+                <source src="../shared/frenchgirl.mp4" type="video/mp4">
+            </video>
+            <div class="titanic-dialog-container" id="frenchgirl-dialog-container">
+                <div class="titanic-dialog-box" id="frenchgirl-dialog-box">
+                    <p id="frenchgirl-dialog-text"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kissing Scene -->
+        <div class="titanic-scene" id="kissing-scene" style="display: none;">
+            <video id="kissing-video" autoplay muted loop>
+                <source src="../shared/kissing-titanic.mp4" type="video/mp4">
+            </video>
         </div>
         
         <div class="chapter-animation" id="chapter-animation">
         </div>
-        
     </div>
     
     <script src="script.js"></script>
