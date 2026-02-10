@@ -3,34 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌹 Parte 5 - La grieta emocional</title>
+    <title>🌹 Parte 5 - El Juego de las Copas</title>
     <link rel="stylesheet" href="../shared/common.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="game-container">
-        <div class="character-video-container">
-            <video id="character-video" autoplay muted loop>
-                <source src="../shared/her-wizard-talking.mp4" type="video/mp4">
-            </video>
+        <!-- Title Screen -->
+        <div class="title-screen" id="title-screen">
+            <h1 class="chapter-title">Parte 5: El Juego de las Copas</h1>
         </div>
-        
-        <div class="dialogue-container">
-            <div class="dialogue-box">
-                <p id="dialogue-text">El dragón observa.</p>
+
+        <!-- Dialogue Phase -->
+        <div class="dialogue-phase" id="dialogue-phase">
+            <div class="character-video-container">
+                <video id="character-video" autoplay muted loop>
+                    <source src="../shared/him-knight-talking.mp4" type="video/mp4">
+                </video>
+            </div>
+            
+            <div class="dialogue-container">
+                <div class="dialogue-box">
+                    <p id="dialogue-text"></p>
+                </div>
+            </div>
+            
+            <div class="instructions" id="instructions">
+                <p>👆 Toca la pantalla para continuar</p>
             </div>
         </div>
-        
-        <div class="instructions" id="instructions">
-            <p>👆 Toca la pantalla para continuar</p>
+
+        <!-- Setup Images Phase -->
+        <div class="setup-phase" id="setup-phase" style="display: none;">
+            <img id="setup-image" src="" alt="Setup">
+            <div class="setup-dialog" id="setup-dialog">
+                <p id="setup-text"></p>
+            </div>
+        </div>
+
+        <!-- Game Phase -->
+        <div class="game-phase" id="game-phase" style="display: none;">
+            <div class="game-header">
+                <div class="score-container">
+                    <div class="score-item">
+                        <span class="score-label">Maga</span>
+                        <span class="score-value" id="mage-score">0</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Caballero</span>
+                        <span class="score-value" id="knight-score">0</span>
+                    </div>
+                </div>
+                <div class="round-info" id="round-info">Ronda 1</div>
+            </div>
+
+            <div class="game-area" id="game-area">
+                <div class="cups-container" id="cups-container"></div>
+                <div class="ball-display" id="ball-display"></div>
+                <button class="empezar-btn" id="empezar-btn">Empezar</button>
+                <button class="cheat-btn" id="cheat-btn" style="display: none;">Trampa 👁️</button>
+            </div>
+        </div>
+
+        <!-- Game State Images -->
+        <div class="game-state-image" id="game-state-image" style="display: none;">
+            <img id="state-image" src="" alt="Game state">
+            <div class="state-dialog" id="state-dialog">
+                <p id="state-text"></p>
+            </div>
+        </div>
+
+        <!-- Final Sequence -->
+        <div class="final-sequence" id="final-sequence" style="display: none;">
+            <img id="final-image" src="" alt="Final">
+            <div class="final-dialog" id="final-dialog">
+                <p id="final-text"></p>
+            </div>
+            <button class="continue-button" id="final-continue-btn" style="display: none;">Continuar →</button>
+        </div>
+
+        <!-- Final Animations -->
+        <div class="final-animation" id="final-animation" style="display: none;">
+            <video id="final-video" autoplay muted loop>
+                <source src="" type="video/mp4">
+            </video>
+            <button class="continue-button" id="animation-continue-btn" style="display: none;">Continuar →</button>
         </div>
         
         <div class="chapter-animation" id="chapter-animation">
         </div>
-        
     </div>
     
     <script src="script.js"></script>
 </body>
 </html>
-

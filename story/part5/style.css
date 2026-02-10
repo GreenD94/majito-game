@@ -2,3 +2,412 @@ body {
     background-image: url('../shared/main_background.jpg');
 }
 
+/* Title Screen */
+.title-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.chapter-title {
+    font-size: 48px;
+    color: #ff69b4;
+    text-shadow: 0 0 20px rgba(255, 105, 180, 0.8), 3px 3px 6px rgba(0, 0, 0, 0.9);
+    font-weight: 900;
+    text-align: center;
+    animation: titlePulse 2s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.9; }
+}
+
+/* Setup Phase */
+.setup-phase {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.setup-phase img {
+    max-width: 90%;
+    max-height: 70vh;
+    object-fit: contain;
+    margin-bottom: 30px;
+    animation: scaleIn 0.5s ease-out;
+}
+
+.setup-dialog {
+    background: rgba(0, 0, 0, 0.85);
+    border: 3px solid #ff69b4;
+    border-radius: 20px;
+    padding: 25px 35px;
+    max-width: 80%;
+    text-align: center;
+}
+
+#setup-text {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    margin: 0;
+}
+
+/* Game Phase */
+.game-phase {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.game-header {
+    margin-bottom: 20px;
+}
+
+.score-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+    gap: 20px;
+}
+
+.score-item {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px 25px;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score-label {
+    color: #ffd700;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.score-value {
+    color: white;
+    font-size: 32px;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.round-info {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    background: rgba(255, 105, 180, 0.3);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.game-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+    min-height: 60vh;
+}
+
+.cups-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1200px;
+    min-height: 200px;
+}
+
+.cup {
+    width: 120px;
+    height: 150px;
+    background: url('../shared/cup.png') no-repeat center;
+    background-size: contain;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    touch-action: manipulation;
+}
+
+.cup:hover {
+    transform: translateY(-10px);
+}
+
+.cup.selected {
+    transform: translateY(-20px) scale(1.1);
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+}
+
+.cup.transparent {
+    opacity: 0.3;
+}
+
+.cup .ball-indicator {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: url('../shared/ball.png') no-repeat center;
+    background-size: contain;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cup.show-ball .ball-indicator {
+    opacity: 1;
+}
+
+.ball-display {
+    width: 60px;
+    height: 60px;
+    background: url('../shared/ball.png') no-repeat center;
+    background-size: contain;
+    position: absolute;
+    transition: all 0.5s ease;
+    z-index: 100;
+    display: none;
+    pointer-events: none;
+}
+
+.empezar-btn,
+.cheat-btn {
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    color: white;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    border-radius: 25px;
+    padding: 15px 40px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    touch-action: manipulation;
+}
+
+.empezar-btn:hover,
+.cheat-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+.cheat-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+}
+
+/* Game State Images */
+.game-state-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 4000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.game-state-image img {
+    max-width: 90%;
+    max-height: 70vh;
+    object-fit: contain;
+    margin-bottom: 30px;
+    animation: scaleIn 0.5s ease-out;
+}
+
+.state-dialog {
+    background: rgba(0, 0, 0, 0.85);
+    border: 3px solid #ff69b4;
+    border-radius: 20px;
+    padding: 25px 35px;
+    max-width: 80%;
+    text-align: center;
+}
+
+#state-text {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Final Sequence */
+.final-sequence {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 5000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.final-sequence img {
+    max-width: 90%;
+    max-height: 70vh;
+    object-fit: contain;
+    margin-bottom: 30px;
+    animation: scaleIn 0.5s ease-out;
+}
+
+.final-dialog {
+    background: rgba(0, 0, 0, 0.85);
+    border: 3px solid #ff69b4;
+    border-radius: 20px;
+    padding: 25px 35px;
+    max-width: 80%;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#final-text {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.final-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 6000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.final-animation video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Continue Button */
+.continue-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    color: white;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    border-radius: 25px;
+    padding: 15px 40px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 105, 180, 0.4);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    animation: pulseButton 2s ease-in-out infinite;
+    touch-action: manipulation;
+}
+
+.continue-button:hover {
+    transform: translate(-50%, -50%) translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 105, 180, 0.6);
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulseButton {
+    0%, 100% {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 105, 180, 0.4);
+    }
+    50% {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 105, 180, 0.7);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .chapter-title {
+        font-size: 32px;
+    }
+
+    .cup {
+        width: 80px;
+        height: 100px;
+    }
+
+    .score-value {
+        font-size: 24px;
+    }
+
+    #setup-text,
+    #state-text,
+    #final-text {
+        font-size: 18px;
+    }
+}
