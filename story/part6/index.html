@@ -3,31 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌹 Parte 6 - El punto medio</title>
+    <title>🌹 Parte 6 - El Oro, la Traición y el Rugido</title>
     <link rel="stylesheet" href="../shared/common.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="game-container">
-        <div class="character-video-container">
-            <video id="character-video" autoplay muted loop>
-                <source src="../shared/her-wizard-talking.mp4" type="video/mp4">
-            </video>
+        <!-- Background -->
+        <div class="background-image" id="background-image"></div>
+        
+        <!-- Background Overlay Animation (for gold shimmer) -->
+        <div class="background-overlay" id="background-overlay"></div>
+        
+        <!-- Full Screen Character Display (Image or Video) -->
+        <div class="character-fullscreen" id="character-fullscreen">
+            <video id="character-video" autoplay muted loop style="display: none;"></video>
+            <img id="character-image" src="" alt="Character" style="display: none;">
         </div>
         
+        <!-- Full Screen Animation (for attacks, falls, etc.) -->
+        <div class="full-screen-animation" id="full-screen-animation" style="display: none;">
+            <video id="full-animation-video" autoplay muted></video>
+            <button class="continue-button" id="animation-continue-btn" style="display: none;">Continuar →</button>
+        </div>
+        
+        <!-- Dialogue at bottom with safe area -->
         <div class="dialogue-container">
             <div class="dialogue-box">
-                <p id="dialogue-text">Peleas mejor de lo que esperaba.</p>
+                <p id="dialogue-text"></p>
             </div>
         </div>
         
+        <!-- Instructions -->
         <div class="instructions" id="instructions">
             <p>👆 Toca la pantalla para continuar</p>
         </div>
-        
-        <div class="chapter-animation" id="chapter-animation">
-        </div>
-        
     </div>
     
     <script src="script.js"></script>
